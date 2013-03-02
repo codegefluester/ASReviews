@@ -38,6 +38,8 @@ Add the following files to your project:
 }
 
 @end
-
-
 ```
+
+License
+=========
+This code is licensed under my very own and special "Do whatever you want with it" license.
