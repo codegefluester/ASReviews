@@ -5,7 +5,9 @@ A small helper to fetch reviews for iOS Apps from the App Store
 
 Usage
 =========
-Add the following files to your project:
+A sample project is included, but in case you want to start right away, add the following files 
+from the sample project to your project:
+
 - ASReviews.h/.m
 - Review.h/.m
 
