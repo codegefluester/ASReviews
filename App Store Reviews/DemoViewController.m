@@ -39,8 +39,8 @@
     self.lastFetchedPage = 1;
     
     self.asReviews = [ASReviews instance];
-    [self.asReviews setAppId:@"409993189"];
-    [self.asReviews setCountryIdentifier:@"de"];
+    [self.asReviews setAppId:@"284882215"];
+    [self.asReviews setCountryIdentifier:@"us"];
     
     [self loadReviews];
 }
