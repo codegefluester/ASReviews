@@ -86,5 +86,25 @@ static ASReviews *_sharedInstance = nil;
     }];
 }
 
+- (NSArray*) reviewsForVersion:(NSString*)appVersion
+{
+	return [self.reviews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"appVersion = %@", appVersion]];
+}
+
+- (NSArray*) negativeReviews
+{
+	return [self.reviews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"rating = %@ OR rating = %@", @"1", @"2"]];
+}
+
+- (NSArray*) neutralReviews
+{
+	return [self.reviews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"rating = %@", @"3"]];
+}
+
+- (NSArray*) positiveReviews
+{
+	return [self.reviews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"rating = %@ OR rating = %@", @"4", @"5"]];
+}
+
 
 @end

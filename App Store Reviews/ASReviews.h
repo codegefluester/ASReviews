@@ -23,4 +23,12 @@
 
 - (void) fetchReviewsFromPage:(int)page onComplete:(void(^)(NSArray *reviews, int page))completionHandler onError:(void(^)(NSError *error, int page))errorHandler;
 
+/**
+ *	Convenience methods
+ **/
+- (NSArray*) reviewsForVersion:(NSString*)appVersion;
+- (NSArray*) negativeReviews;
+- (NSArray*) positiveReviews;
+- (NSArray*) neutralReviews;
+
 @end

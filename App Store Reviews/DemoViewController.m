@@ -52,6 +52,9 @@
         self.lastFetchedPage = 1;
         [self.reviews addObjectsFromArray:reviews];
         [self.tableView reloadData];
+		
+		NSLog(@"Negs: %@", [self.asReviews negativeReviews]);
+		
     } onError:^(NSError *error, int page) {
         NSLog(@"Failed to fetch reviews on page %i: %@", page, error.description);
     }];
