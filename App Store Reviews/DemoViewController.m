@@ -53,7 +53,7 @@
         [self.reviews addObjectsFromArray:reviews];
         [self.tableView reloadData];
 		
-		NSLog(@"Negs: %@", [self.asReviews negativeReviews]);
+		NSLog(@"Average rating: %.2f", [self.asReviews averageRatingForVersion:@"2.3.6"]);
 		
     } onError:^(NSError *error, int page) {
         NSLog(@"Failed to fetch reviews on page %i: %@", page, error.description);

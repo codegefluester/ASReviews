@@ -106,5 +106,20 @@ static ASReviews *_sharedInstance = nil;
 	return [self.reviews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"rating = %@ OR rating = %@", @"4", @"5"]];
 }
 
+- (float) averageRatingForVersion:(NSString*)appVersion
+{
+	float avg = 0.0;
+	
+	NSArray *versionReviews = [self reviewsForVersion:appVersion];
+	
+	if ([versionReviews count] > 0) {
+		for (Review *review in versionReviews) {
+			avg += [[review rating] floatValue];
+		}
+	}
+	
+	return (avg / [versionReviews count]);
+}
+
 
 @end

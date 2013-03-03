@@ -30,5 +30,6 @@
 - (NSArray*) negativeReviews;
 - (NSArray*) positiveReviews;
 - (NSArray*) neutralReviews;
+- (float) averageRatingForVersion:(NSString*)appVersion;
 
 @end
