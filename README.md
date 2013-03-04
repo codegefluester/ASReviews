@@ -23,35 +23,35 @@ from the sample project to your project:
 - ASReviews.h/.m
 - Review.h/.m
 
+
+## Fetch reviews
+This sample will fetch the 50 latest reviews for the Facebook iOS App from the US App Store
 ```
-#import "ASReviews.h"
-
-@implementation YourViewController
-
-- (void) viewDidLoad
-{
-  [super viewDidLoad]
-  
   ASReviews *asr = [ASReviews instance];
   // Set the ID of your app. If you don't know it, look it up in iTunes Connect
-  [asr setAppId:@"YOUR_APPS_ID"];
+  [asr setAppId:@"284882215"];
   
   // Set the country for which you want to get the reviews for (us = United States)
   [asr setCountryIdentifier:@"us"];
   
-  /**
-  * Fetch the reviews
-  **/
   [asr fetchReviewsFromPage:1 onComplete:^(NSArray *reviews, int page) {
-        NSLog(@"Found %i reviews on page %i", [reviews count], page);
         NSLog(@"Reviews: %@", reviews);
     } onError:^(NSError *error, int page) {
         NSLog(@"Failed to fetch reviews on page %i: %@", page, error.description);
-  }];
-  
+  }];  
 }
+```
 
-@end
+## Filter reviews
+This sample will filter out negative reviews (1 and 2 star reviews)
+```
+  // .. setup ASReviews (see above sample) ...
+  [asr fetchReviewsFromPage:1 onComplete:^(NSArray *reviews, int page) {
+        NSLog(@"Negative reviews: %@", [asr negativeReviews]);
+    } onError:^(NSError *error, int page) {
+        NSLog(@"Failed to fetch reviews on page %i: %@", page, error.description);
+  }];  
+}
 ```
 
 License
