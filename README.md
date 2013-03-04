@@ -1,7 +1,7 @@
 ASReviews
 =========
 
-A small helper to fetch reviews for iOS Apps from the App Store
+A small helper to fetch reviews for iOS/Mac OS X Apps from the App Store
 
 Features
 =========
