@@ -12,31 +12,15 @@
 
 @end
 
-#define DEFAULT_CELL_HEIGHT 50.0f
-
 @implementation DemoViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.reviews = [[NSMutableArray alloc] init];
-    self.lastFetchedPage = 1;
+    self.pageToFetch = 1;
+    self.isFetching = NO;
     
     self.asReviews = [ASReviews instance];
     [self.asReviews setAppId:@"284882215"];
@@ -47,25 +31,20 @@
 
 - (void) loadReviews
 {
-    [self.asReviews fetchReviewsFromPage:self.lastFetchedPage onComplete:^(NSArray *reviews, int page) {
+    self.isFetching = YES;
+    [self.asReviews fetchReviewsFromPage:self.pageToFetch onComplete:^(NSArray *reviews, int page) {
         NSLog(@"Found %i reviews on page %i", [reviews count], page);
-        self.lastFetchedPage = 1;
+        [self.reviews removeAllObjects];
         [self.reviews addObjectsFromArray:reviews];
         [self.tableView reloadData];
-		
-		NSLog(@"Average rating: %.2f", [self.asReviews averageRatingForVersion:@"2.3.6"]);
-		
+		self.isFetching = NO;
+		NSLog(@"Average rating: %.2f", [self.asReviews averageRatingForVersion:nil]);
     } onError:^(NSError *error, int page) {
         NSLog(@"Failed to fetch reviews on page %i: %@", page, error.description);
+        self.isFetching = NO;
     }];
 }
 
-- (void) scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if(scrollView.contentOffset.y >= scrollView.contentSize.height) {
-        NSLog(@"Bottom");
-    }
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -99,59 +78,41 @@
     Review *current = [self.reviews objectAtIndex:indexPath.row];
     cell.textLabel.text = [current title];
     cell.detailTextLabel.text = [current content];
+    
+    if ([current isPositiveReview]) {
+        cell.textLabel.textColor = [UIColor greenColor];
+    } else if([current isNegativeReview]) {
+        cell.textLabel.textColor = [UIColor redColor];
+    } else {
+        cell.textLabel.textColor = [UIColor yellowColor];
+    }
+    
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+// http://stackoverflow.com/a/5627837/515042
+- (void)scrollViewDidScroll:(UIScrollView *)aScrollView {
+    CGPoint offset = aScrollView.contentOffset;
+    CGRect bounds = aScrollView.bounds;
+    CGSize size = aScrollView.contentSize;
+    UIEdgeInsets inset = aScrollView.contentInset;
+    float y = offset.y + bounds.size.height - inset.bottom;
+    float h = size.height;
+    // NSLog(@"offset: %f", offset.y);
+    // NSLog(@"content.height: %f", size.height);
+    // NSLog(@"bounds.height: %f", bounds.size.height);
+    // NSLog(@"inset.top: %f", inset.top);
+    // NSLog(@"inset.bottom: %f", inset.bottom);
+    // NSLog(@"pos: %f of %f", y, h);
+    
+    float reload_distance = 10;
+    if(y > h + reload_distance) {
+        if(self.pageToFetch < 10 && !self.isFetching) {
+            // Load more reviews
+            self.pageToFetch++;
+            [self loadReviews];
+        }
+    }
 }
 
 @end

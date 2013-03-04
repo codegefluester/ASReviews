@@ -21,7 +21,7 @@ static ASReviews *_sharedInstance = nil;
     
     if (_sharedInstance == nil) {
         _sharedInstance = [[ASReviews alloc] init];
-        _sharedInstance.countryIdentifier = @"de";
+        _sharedInstance.countryIdentifier = @"us";
         _sharedInstance.reviews = [[NSMutableArray alloc] initWithCapacity:0];
     }
     
@@ -43,20 +43,21 @@ static ASReviews *_sharedInstance = nil;
 {
     NSAssert(self.appId != nil, @"App ID should not be nil");
     
-    if(page > 10) page = 10;
-    
     NSURL *reviewUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/%@/rss/customerreviews/page=%i/id=%@/sortBy=mostRecent/json", self.countryIdentifier, page, self.appId]];
     
     NSLog(@"Fetching reviews for app %@", self.appId);
     
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:reviewUrl] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *responseError) {
-        if (responseError == nil) {
+        
+        if (responseError == nil) {            
             NSDictionary *reviewData = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:nil];
             
-            //NSLog(@"Raw: %@", reviewData);
-            
             if ([reviewData objectForKey:@"feed"] != nil && [[reviewData objectForKey:@"feed"] objectForKey:@"entry"] != nil) {
-                NSMutableArray *tmp = [NSMutableArray arrayWithArray:[[reviewData objectForKey:@"feed"] objectForKey:@"entry"]];
+                NSMutableArray *tmp = nil;
+                if([[[reviewData objectForKey:@"feed"] objectForKey:@"entry"] isKindOfClass:[NSArray class]]) {
+                    tmp = [NSMutableArray arrayWithArray:[[reviewData objectForKey:@"feed"] objectForKey:@"entry"]];
+                }
+                
                 if([tmp count] > 0) [tmp removeObjectAtIndex:0];
                 
                 if ([tmp count] > 0) {
@@ -110,15 +111,19 @@ static ASReviews *_sharedInstance = nil;
 {
 	float avg = 0.0;
 	
-	NSArray *versionReviews = [self reviewsForVersion:appVersion];
+	NSArray *versionReviews = nil;
+    if(appVersion != nil) versionReviews = [self reviewsForVersion:appVersion];
+    else versionReviews = self.reviews;
 	
 	if ([versionReviews count] > 0) {
 		for (Review *review in versionReviews) {
 			avg += [[review rating] floatValue];
 		}
-	}
-	
-	return (avg / [versionReviews count]);
+        
+        return (avg / [versionReviews count]);
+    }
+    
+    return avg;
 }
 
 

@@ -26,4 +26,19 @@
     return [self.content sizeWithFont:theFont constrainedToSize:theSize lineBreakMode:NSLineBreakByWordWrapping];
 }
 
+- (BOOL) isNegativeReview
+{
+    return ([self.rating isEqualToString:@"1"] || [self.rating isEqualToString:@"2"]);
+}
+
+- (BOOL) isPositiveReview
+{
+    return ([self.rating isEqualToString:@"4"] || [self.rating isEqualToString:@"5"]);
+}
+
+- (BOOL) isNeutralReview
+{
+    return [self.rating isEqualToString:@"3"];
+}
+
 @end

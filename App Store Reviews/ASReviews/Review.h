@@ -26,4 +26,9 @@
 
 - (CGSize) textDimensionsConstrainedToSize:(CGSize)theSize withFont:(UIFont*)theFont;
 
+- (BOOL) isNegativeReview;
+- (BOOL) isPositiveReview;
+- (BOOL) isNeutralReview;
+
+
 @end

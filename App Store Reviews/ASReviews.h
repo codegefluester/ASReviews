@@ -13,6 +13,8 @@
     NSString *appId;
     NSString *countryIdentifier;
     NSMutableArray *reviews;
+    
+    int lastPage;
 }
 
 @property (strong) NSString *appId;

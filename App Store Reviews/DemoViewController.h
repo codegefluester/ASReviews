@@ -13,7 +13,8 @@
 
 @property (strong) ASReviews *asReviews;
 @property (strong) NSMutableArray *reviews;
-@property int lastFetchedPage;
+@property int pageToFetch;
+@property BOOL isFetching;
 
 - (void) loadReviews;
 
