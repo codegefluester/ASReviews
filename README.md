@@ -9,6 +9,11 @@ Features
 - Calculate average rating based on fetched reviews
 - Filter positive/negative/neutral reviews
 
+TODOs
+=========
+- Implement caching
+- Implement method to fetch all available pages at once
+
 
 Usage
 =========
