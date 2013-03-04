@@ -32,8 +32,9 @@ static ASReviews *_sharedInstance = nil;
  *  Fetches all reviews on the page and calls the completionHandler
  *  when all data has been pulled from Apple servers.
  *
- *  Regardless of the pages listed in the response, 10 seems to be the last page that is fetchable,
- *  everything above 10 returns a server error.
+ *  Regardless of the pages listed in the response, page 10 seems 
+ *  to be the last page that is fetchable. 
+ *  Everything above 10 returns a server error.
  *
  *  @param int page The page to fetch (1-10)
  *  @param block The completion handler
@@ -88,26 +89,55 @@ static ASReviews *_sharedInstance = nil;
     }];
 }
 
+/**
+ *  Returns reviews for a specific version of the app
+ *
+ *  @param NSString The version string
+ *  @return NSArray An array of reviews
+ **/
 - (NSArray*) reviewsForVersion:(NSString*)appVersion
 {
 	return [self.reviews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"appVersion = %@", appVersion]];
 }
 
+/**
+ *  Returns all negative reviews of the app
+ *
+ *  @return NSArray An array of reviews
+ **/
 - (NSArray*) negativeReviews
 {
 	return [self.reviews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"rating = %@ OR rating = %@", @"1", @"2"]];
 }
 
+/**
+ *  Returns all neutral reviews of the app
+ *
+ *  @return NSArray An array of reviews
+ **/
 - (NSArray*) neutralReviews
 {
 	return [self.reviews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"rating = %@", @"3"]];
 }
 
+/**
+ *  Returns all positive reviews of the app
+ *
+ *  @return NSArray An array of reviews
+ **/
 - (NSArray*) positiveReviews
 {
 	return [self.reviews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"rating = %@ OR rating = %@", @"4", @"5"]];
 }
 
+/**
+ *  Returns the average rating for a specific version
+ *  of the app. If appVersion is nil, it will return
+ *  an average rating for all versions
+ *
+ *  @param NSString The version string
+ *  @return NSArray An array of reviews
+ **/
 - (float) averageRatingForVersion:(NSString*)appVersion
 {
 	float avg = 0.0;
