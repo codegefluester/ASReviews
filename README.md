@@ -48,6 +48,8 @@ This sample will filter out negative reviews (1 and 2 star reviews)
   // .. setup ASReviews (see above sample) ...
   [asr fetchReviewsFromPage:1 onComplete:^(NSArray *reviews, int page) {
         NSLog(@"Negative reviews: %@", [asr negativeReviews]);
+        //NSLog(@"Positive reviews: %@", [asr positiveReviews]);
+        //NSLog(@"Neutral reviews: %@", [asr neutralReviews]);
     } onError:^(NSError *error, int page) {
         NSLog(@"Failed to fetch reviews on page %i: %@", page, error.description);
   }];  
