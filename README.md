@@ -3,6 +3,13 @@ ASReviews
 
 A small helper to fetch reviews for iOS Apps from the App Store
 
+Features
+=========
+- Fetch reviews for an iOS/Mac App
+- Calculate avergae rating based on fetched reviews
+- Filter positive/negative/neutral reviews
+
+
 Usage
 =========
 A sample project is included, but in case you want to start right away, add the following files 
