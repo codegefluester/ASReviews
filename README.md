@@ -53,6 +53,23 @@ This sample will fetch the latest 50 reviews and filter out negative reviews (1 
 }
 ```
 
+## Check if a review is positive, negative or neutral
+```
+  // .. setup ASReviews (see above sample) ...
+  [asr fetchReviewsFromPage:1 onComplete:^(NSArray *reviews, int page) {
+        for(Review *review in reviews) {
+            if([review isPositive]) NSLog(@"Positive review");
+            
+            if([review isNegative]) NSLog(@"Negative review");
+            
+            if([review isNeutral]) NSLog(@"Neutral review");
+        }
+    } onError:^(NSError *error, int page) {
+        NSLog(@"Failed to fetch reviews on page %i: %@", page, error.description);
+  }];  
+}
+```
+
 License
 =========
 This code is licensed under my very own and special "Do whatever you want with it" license.
