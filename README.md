@@ -42,7 +42,10 @@ This sample will fetch the 50 latest reviews for the Facebook iOS App from the U
 ## Filter reviews
 This sample will fetch the latest 50 reviews and filter out negative reviews (1 and 2 star reviews)
 ```
-  // .. setup ASReviews (see above sample) ...
+  ASReviews *asr = [ASReviews instance];
+  [asr setAppId:@"284882215"];
+  [asr setCountryIdentifier:@"us"];
+  
   [asr fetchReviewsFromPage:1 onComplete:^(NSArray *reviews, int page) {
         NSLog(@"Negative reviews: %@", [asr negativeReviews]);
         //NSLog(@"Positive reviews: %@", [asr positiveReviews]);
@@ -55,7 +58,10 @@ This sample will fetch the latest 50 reviews and filter out negative reviews (1 
 
 ## Check if a review is positive, negative or neutral
 ```
-  // .. setup ASReviews (see above sample) ...
+  ASReviews *asr = [ASReviews instance];
+  [asr setAppId:@"284882215"];
+  [asr setCountryIdentifier:@"us"];
+  
   [asr fetchReviewsFromPage:1 onComplete:^(NSArray *reviews, int page) {
         for(Review *review in reviews) {
             if([review isPositive]) NSLog(@"Positive review");
