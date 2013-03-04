@@ -28,10 +28,7 @@ from the sample project to your project:
 This sample will fetch the 50 latest reviews for the Facebook iOS App from the US App Store
 ```
   ASReviews *asr = [ASReviews instance];
-  // Set the ID of your app. If you don't know it, look it up in iTunes Connect
   [asr setAppId:@"284882215"];
-  
-  // Set the country for which you want to get the reviews for (us = United States)
   [asr setCountryIdentifier:@"us"];
   
   [asr fetchReviewsFromPage:1 onComplete:^(NSArray *reviews, int page) {
@@ -43,7 +40,7 @@ This sample will fetch the 50 latest reviews for the Facebook iOS App from the U
 ```
 
 ## Filter reviews
-This sample will filter out negative reviews (1 and 2 star reviews)
+This sample will fetch the latest 50 reviews and filter out negative reviews (1 and 2 star reviews)
 ```
   // .. setup ASReviews (see above sample) ...
   [asr fetchReviewsFromPage:1 onComplete:^(NSArray *reviews, int page) {
