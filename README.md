@@ -55,6 +55,8 @@ ASReviews *asr = [ASReviews instance];
 ```
 
 ## Check if a review is positive, negative or neutral
+If you're displaying reviews in a `UITableView`you might want to adjust the `UITableViewCell`
+accordingly. Each review object has 3 methods to check wether it is a positive, negative or neutral review.
 ```objc
 ASReviews *asr = [ASReviews instance];
 [asr setAppId:@"284882215"];
