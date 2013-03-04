@@ -16,6 +16,7 @@
     NSString *title;
     NSString *appVersion;
     NSString *rating;
+    NSString *reviewId;
 }
 
 @property (strong) NSString *author;
@@ -23,6 +24,7 @@
 @property (strong) NSString *title;
 @property (strong) NSString *appVersion;
 @property (strong) NSString *rating;
+@property (strong) NSString *reviewId;
 
 - (CGSize) textDimensionsConstrainedToSize:(CGSize)theSize withFont:(UIFont*)theFont;
 

@@ -68,6 +68,7 @@ static ASReviews *_sharedInstance = nil;
                         [aReview setRating:[[review objectForKey:@"im:rating"] objectForKey:@"label"]];
                         [aReview setAppVersion:[[review objectForKey:@"im:version"] objectForKey:@"label"]];
                         [aReview setTitle:[[review objectForKey:@"title"] objectForKey:@"label"]];
+                        [aReview setReviewId:[[review objectForKey:@"id"] objectForKey:@"label"]];
                         [self.reviews addObject:aReview];
                     }
                 }

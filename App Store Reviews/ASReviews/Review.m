@@ -15,10 +15,11 @@
 @synthesize appVersion;
 @synthesize content;
 @synthesize rating;
+@synthesize reviewId;
 
 - (NSString*) description
 {
-    return [NSString stringWithFormat:@"Author: %@ Title: %@ Content: %@ Version: %@ Stars: %@", self.author, self.title, self.content, self.appVersion, self.rating];
+    return [NSString stringWithFormat:@"ID: %@ Author: %@ Title: %@ Content: %@ Version: %@ Stars: %@", self.reviewId, self.author, self.title, self.content, self.appVersion, self.rating];
 }
 
 - (CGSize) textDimensionsConstrainedToSize:(CGSize)theSize withFont:(UIFont*)theFont

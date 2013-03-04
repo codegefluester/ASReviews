@@ -39,7 +39,7 @@ ASReviews *asr = [ASReviews instance];
 ```
 
 ## Filter reviews
-This sample will fetch the latest 50 reviews and filter out negative reviews (1 and 2 star reviews)
+This sample will fetch the latest 50 reviews and filters out negative reviews (1 and 2 star reviews)
 ```objc
 ASReviews *asr = [ASReviews instance];
 [asr setAppId:@"284882215"];
