@@ -26,8 +26,6 @@
 @property (strong) NSString *rating;
 @property (strong) NSString *reviewId;
 
-- (CGSize) textDimensionsConstrainedToSize:(CGSize)theSize withFont:(UIFont*)theFont;
-
 - (BOOL) isNegativeReview;
 - (BOOL) isPositiveReview;
 - (BOOL) isNeutralReview;

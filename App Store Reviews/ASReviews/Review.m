@@ -22,11 +22,6 @@
     return [NSString stringWithFormat:@"ID: %@ Author: %@ Title: %@ Content: %@ Version: %@ Stars: %@", self.reviewId, self.author, self.title, self.content, self.appVersion, self.rating];
 }
 
-- (CGSize) textDimensionsConstrainedToSize:(CGSize)theSize withFont:(UIFont*)theFont
-{
-    return [self.content sizeWithFont:theFont constrainedToSize:theSize lineBreakMode:NSLineBreakByWordWrapping];
-}
-
 - (BOOL) isNegativeReview
 {
     return ([self.rating isEqualToString:@"1"] || [self.rating isEqualToString:@"2"]);
