@@ -39,8 +39,8 @@
     self.lastFetchedPage = 1;
     
     self.asReviews = [ASReviews instance];
-    [self.asReviews setAppId:@"409993189"];
-    [self.asReviews setCountryIdentifier:@"de"];
+    [self.asReviews setAppId:@"284882215"];
+    [self.asReviews setCountryIdentifier:@"us"];
     
     [self loadReviews];
 }
@@ -52,6 +52,9 @@
         self.lastFetchedPage = 1;
         [self.reviews addObjectsFromArray:reviews];
         [self.tableView reloadData];
+		
+		NSLog(@"Average rating: %.2f", [self.asReviews averageRatingForVersion:@"2.3.6"]);
+		
     } onError:^(NSError *error, int page) {
         NSLog(@"Failed to fetch reviews on page %i: %@", page, error.description);
     }];
