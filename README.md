@@ -23,7 +23,7 @@ from the sample project to your project:
 - Review.h/.m
 
 
-## Fetch reviews
+## Fetch reviews by page
 This sample will fetch the 50 latest reviews for the Facebook iOS App from the US App Store
 ```objc
 ASReviews *asr = [ASReviews instance];
@@ -34,6 +34,18 @@ ASReviews *asr = [ASReviews instance];
     NSLog(@"Reviews: %@", reviews);
 } onError:^(NSError *error, int page) {
     NSLog(@"Failed to fetch reviews on page %i: %@", page, error.description);
+}];
+```
+
+## Fetch all available reviews at once
+This sample will fetch all available reviews for the Facebook iOS App from the US App Store
+```objc
+ASReviews *asr = [ASReviews instance];
+[asr setAppId:@"284882215"];
+[asr setCountryIdentifier:@"us"];
+
+[asr fetchAllReviews:^(NSArray *reviews, int lastFetchedPage) {
+    NSLog(@"Average rating: %.2f based on %i reviews", [asr averageRatingForVersion:nil], reviews.count);
 }];
 ```
 
