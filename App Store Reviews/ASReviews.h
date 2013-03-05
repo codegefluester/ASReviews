@@ -26,6 +26,7 @@
 @property (strong) NSString *appName;
 @property (strong) NSString *iconUrl;
 @property (strong) NSString *appCategory;
+@property (strong) NSMutableSet *availableVersions;
 @property int lastPage;
 
 + (ASReviews*) instance;
@@ -41,5 +42,6 @@
 - (NSArray*) positiveReviews;
 - (NSArray*) neutralReviews;
 - (float) averageRatingForVersion:(NSString*)appVersion;
+- (NSArray*) versions;
 
 @end

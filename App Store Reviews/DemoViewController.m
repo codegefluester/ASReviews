@@ -28,13 +28,19 @@
 
 - (void) loadReviews
 {
-    /*[self.asReviews fetchAllReviews:^(NSArray *reviews, int lastFetchedPage) {
+    [self.asReviews fetchAllReviews:^(NSArray *reviews, int lastFetchedPage) {
         self.reviews = [[NSMutableArray alloc] initWithArray:reviews];
         [self.tableView reloadData];
-        NSLog(@"Average rating: %.2f based on %i reviews", [self.asReviews averageRatingForVersion:nil], reviews.count);
-    }];*/
+        
+        NSArray *versions = [self.asReviews versions];
+        if ([versions count] > 0) {
+            for (NSString *versionString in versions) {
+                NSLog(@"Average rating for v%@: %.2f based on %i reviews", versionString, [self.asReviews averageRatingForVersion:versionString], [[self.asReviews reviewsForVersion:versionString] count]);
+            }
+        }
+    }];
     
-    [self.asReviews fetchReviewsFromPage:1 onComplete:^(NSArray *reviews, int page) {
+    /*[self.asReviews fetchReviewsFromPage:1 onComplete:^(NSArray *reviews, int page) {
         NSLog(@"Found %i reviews on page %i", [reviews count], page);
         [self.reviews removeAllObjects];
         [self.reviews addObjectsFromArray:reviews];
@@ -42,7 +48,7 @@
 		NSLog(@"Average rating: %.2f", [self.asReviews averageRatingForVersion:nil]);
     } onError:^(NSError *error, int page) {
         NSLog(@"Failed to fetch reviews on page %i: %@", page, error.description);
-    }];
+    }];*/
 }
 
 

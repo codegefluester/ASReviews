@@ -17,6 +17,7 @@
 @synthesize iconUrl;
 @synthesize appCategory;
 @synthesize lastPage;
+@synthesize availableVersions;
 
 static ASReviews *_sharedInstance = nil;
 
@@ -28,6 +29,7 @@ static ASReviews *_sharedInstance = nil;
         _sharedInstance.countryIdentifier = @"us";
         _sharedInstance.reviews = [[NSMutableArray alloc] initWithCapacity:0];
         _sharedInstance.lastPage = 1;
+        _sharedInstance.availableVersions = [[NSMutableSet alloc] initWithCapacity:0];
     }
     
     return _sharedInstance;
@@ -82,6 +84,7 @@ static ASReviews *_sharedInstance = nil;
                         [aReview setReviewId:[[review objectForKey:@"id"] objectForKey:@"label"]];
                         [fetchedReviews addObject:aReview];
                         [self.reviews addObject:aReview];
+                        [self.availableVersions addObject:aReview.appVersion];
                     }
                 }
             }
@@ -190,6 +193,17 @@ static ASReviews *_sharedInstance = nil;
     }
     
     return avg;
+}
+
+/**
+ *  Returns a list of versions we have fetched
+ *  reviews for
+ *
+ *  @return NSArray A list of version strings
+ **/
+- (NSArray*) versions
+{
+    return [self.availableVersions allObjects];
 }
 
 
