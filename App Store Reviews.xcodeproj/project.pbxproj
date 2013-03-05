@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1122D74F16E6014A00E5763A /* ReviewDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1122D74E16E6014A00E5763A /* ReviewDetailViewController.m */; };
+		116B69D316E62AC7002B3D3D /* ASReviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B69D116E62AC7002B3D3D /* ASReviews.m */; };
 		1199312D16E22C1100B1101E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1199312C16E22C1100B1101E /* UIKit.framework */; };
 		1199312F16E22C1100B1101E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1199312E16E22C1100B1101E /* Foundation.framework */; };
 		1199313116E22C1100B1101E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1199313016E22C1100B1101E /* CoreGraphics.framework */; };
@@ -17,7 +18,6 @@
 		1199313F16E22C1200B1101E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1199313E16E22C1200B1101E /* Default.png */; };
 		1199314116E22C1200B1101E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1199314016E22C1200B1101E /* Default@2x.png */; };
 		1199314316E22C1200B1101E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1199314216E22C1200B1101E /* Default-568h@2x.png */; };
-		1199314C16E22C3300B1101E /* ASReviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 1199314B16E22C3300B1101E /* ASReviews.m */; };
 		1199314F16E2303200B1101E /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = 1199314E16E2303200B1101E /* Review.m */; };
 		1199315316E2359600B1101E /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1199315116E2359600B1101E /* DemoViewController.m */; };
 		1199315416E2359600B1101E /* DemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1199315216E2359600B1101E /* DemoViewController.xib */; };
@@ -26,6 +26,8 @@
 /* Begin PBXFileReference section */
 		1122D74D16E6014A00E5763A /* ReviewDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewDetailViewController.h; sourceTree = "<group>"; };
 		1122D74E16E6014A00E5763A /* ReviewDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewDetailViewController.m; sourceTree = "<group>"; };
+		116B69D116E62AC7002B3D3D /* ASReviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASReviews.m; path = ASReviews/ASReviews.m; sourceTree = "<group>"; };
+		116B69D216E62AC7002B3D3D /* ASReviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASReviews.h; path = ASReviews/ASReviews.h; sourceTree = "<group>"; };
 		1199312916E22C1100B1101E /* App Store Reviews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Store Reviews.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1199312C16E22C1100B1101E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1199312E16E22C1100B1101E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -39,8 +41,6 @@
 		1199313E16E22C1200B1101E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		1199314016E22C1200B1101E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		1199314216E22C1200B1101E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		1199314A16E22C3300B1101E /* ASReviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASReviews.h; sourceTree = "<group>"; };
-		1199314B16E22C3300B1101E /* ASReviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASReviews.m; sourceTree = "<group>"; };
 		1199314D16E2303200B1101E /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Review.h; path = ASReviews/Review.h; sourceTree = "<group>"; };
 		1199314E16E2303200B1101E /* Review.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Review.m; path = ASReviews/Review.m; sourceTree = "<group>"; };
 		1199315016E2359600B1101E /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
@@ -122,8 +122,8 @@
 		1199314916E22C1700B1101E /* ASR */ = {
 			isa = PBXGroup;
 			children = (
-				1199314A16E22C3300B1101E /* ASReviews.h */,
-				1199314B16E22C3300B1101E /* ASReviews.m */,
+				116B69D116E62AC7002B3D3D /* ASReviews.m */,
+				116B69D216E62AC7002B3D3D /* ASReviews.h */,
 				1199314D16E2303200B1101E /* Review.h */,
 				1199314E16E2303200B1101E /* Review.m */,
 			);
@@ -198,10 +198,10 @@
 			files = (
 				1199313916E22C1200B1101E /* main.m in Sources */,
 				1199313D16E22C1200B1101E /* AppDelegate.m in Sources */,
-				1199314C16E22C3300B1101E /* ASReviews.m in Sources */,
 				1199314F16E2303200B1101E /* Review.m in Sources */,
 				1199315316E2359600B1101E /* DemoViewController.m in Sources */,
 				1122D74F16E6014A00E5763A /* ReviewDetailViewController.m in Sources */,
+				116B69D316E62AC7002B3D3D /* ASReviews.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
