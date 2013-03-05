@@ -11,7 +11,7 @@ Features
 TODOs
 =========
 - Implement caching
-- Implement method to fetch all available pages at once
+- ~~Implement method to fetch all available pages at once~~
 
 
 Usage
