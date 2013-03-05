@@ -13,6 +13,10 @@
 @synthesize appId;
 @synthesize countryIdentifier;
 @synthesize reviews;
+@synthesize appName;
+@synthesize iconUrl;
+@synthesize appCategory;
+@synthesize lastPage;
 
 static ASReviews *_sharedInstance = nil;
 
@@ -23,6 +27,7 @@ static ASReviews *_sharedInstance = nil;
         _sharedInstance = [[ASReviews alloc] init];
         _sharedInstance.countryIdentifier = @"us";
         _sharedInstance.reviews = [[NSMutableArray alloc] initWithCapacity:0];
+        _sharedInstance.lastPage = 1;
     }
     
     return _sharedInstance;
@@ -52,12 +57,17 @@ static ASReviews *_sharedInstance = nil;
         
         if (responseError == nil) {            
             NSDictionary *reviewData = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:nil];
+            NSMutableArray *fetchedReviews = [[NSMutableArray alloc] initWithCapacity:0];
             
             if ([reviewData objectForKey:@"feed"] != nil && [[reviewData objectForKey:@"feed"] objectForKey:@"entry"] != nil) {
                 NSMutableArray *tmp = nil;
                 if([[[reviewData objectForKey:@"feed"] objectForKey:@"entry"] isKindOfClass:[NSArray class]]) {
                     tmp = [NSMutableArray arrayWithArray:[[reviewData objectForKey:@"feed"] objectForKey:@"entry"]];
                 }
+                
+                self.appName = [[[tmp objectAtIndex:0] objectForKey:@"im:name"] objectForKey:@"label"];
+                self.appCategory = [[[[tmp objectAtIndex:0] objectForKey:@"category"] objectForKey:@"attributes"] objectForKey:@"label"];
+                self.iconUrl = [[[[tmp objectAtIndex:0] objectForKey:@"im:image"] lastObject] objectForKey:@"label"];
                 
                 if([tmp count] > 0) [tmp removeObjectAtIndex:0];
                 
@@ -70,13 +80,14 @@ static ASReviews *_sharedInstance = nil;
                         [aReview setAppVersion:[[review objectForKey:@"im:version"] objectForKey:@"label"]];
                         [aReview setTitle:[[review objectForKey:@"title"] objectForKey:@"label"]];
                         [aReview setReviewId:[[review objectForKey:@"id"] objectForKey:@"label"]];
+                        [fetchedReviews addObject:aReview];
                         [self.reviews addObject:aReview];
                     }
                 }
             }
             
             if (completionHandler != nil) {
-                completionHandler(self.reviews, page);
+                completionHandler(fetchedReviews, page);
             }
             
         } else {
@@ -86,6 +97,30 @@ static ASReviews *_sharedInstance = nil;
                 NSLog(@"Error: %@", responseError.description);
             }
         }
+    }];
+}
+
+/**
+ *  Fetches all available reviews at once
+ *
+ *  @param block The completion handler to execute when loading is finished
+ *  @return void
+ **/
+- (void) fetchAllReviews:(void (^)(NSArray *reviews, int lastFetchedPage))completionHandler
+{
+    [self fetchReviewsFromPage:self.lastPage onComplete:^(NSArray *list, int page) {
+        if(list.count > 0) {
+            self.lastPage++;
+            [self fetchAllReviews:completionHandler];
+        } else {
+            if (completionHandler != nil) {
+                completionHandler(self.reviews, self.lastPage);
+            } else {
+                NSLog(@"Fetched %i reviews, last page was %i", self.reviews.count, page);
+            }
+        }
+    } onError:^(NSError *error, int page) {
+        NSLog(@"Error while fetching page %i: %@", page, error.description);
     }];
 }
 

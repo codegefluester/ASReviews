@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1122D74F16E6014A00E5763A /* ReviewDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1122D74E16E6014A00E5763A /* ReviewDetailViewController.m */; };
 		1199312D16E22C1100B1101E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1199312C16E22C1100B1101E /* UIKit.framework */; };
 		1199312F16E22C1100B1101E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1199312E16E22C1100B1101E /* Foundation.framework */; };
 		1199313116E22C1100B1101E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1199313016E22C1100B1101E /* CoreGraphics.framework */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1122D74D16E6014A00E5763A /* ReviewDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewDetailViewController.h; sourceTree = "<group>"; };
+		1122D74E16E6014A00E5763A /* ReviewDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewDetailViewController.m; sourceTree = "<group>"; };
 		1199312916E22C1100B1101E /* App Store Reviews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Store Reviews.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1199312C16E22C1100B1101E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1199312E16E22C1100B1101E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,6 +99,8 @@
 				1199315016E2359600B1101E /* DemoViewController.h */,
 				1199315116E2359600B1101E /* DemoViewController.m */,
 				1199315216E2359600B1101E /* DemoViewController.xib */,
+				1122D74D16E6014A00E5763A /* ReviewDetailViewController.h */,
+				1122D74E16E6014A00E5763A /* ReviewDetailViewController.m */,
 			);
 			path = "App Store Reviews";
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 				1199314C16E22C3300B1101E /* ASReviews.m in Sources */,
 				1199314F16E2303200B1101E /* Review.m in Sources */,
 				1199315316E2359600B1101E /* DemoViewController.m in Sources */,
+				1122D74F16E6014A00E5763A /* ReviewDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +316,7 @@
 				1199314816E22C1200B1101E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

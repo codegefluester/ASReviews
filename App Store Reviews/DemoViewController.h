@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ASReviews.h"
+#import "ReviewDetailViewController.h"
 
 @interface DemoViewController : UITableViewController
 
 @property (strong) ASReviews *asReviews;
 @property (strong) NSMutableArray *reviews;
-@property int pageToFetch;
-@property BOOL isFetching;
 
 - (void) loadReviews;
 
