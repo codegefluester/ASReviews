@@ -23,7 +23,7 @@ from the sample project to your project:
 - Review.h/.m
 
 
-## Fetch reviews by page
+## Fetch reviews from a specific page
 This sample will fetch the 50 latest reviews for the Facebook iOS App from the US App Store
 ```objc
 ASReviews *asr = [ASReviews instance];
